@@ -1,4 +1,5 @@
 // ==UserScript==
+// @author       iLintu
 // @name         ChatGPT Read Aloud Button Restore
 // @namespace    http://tampermonkey.net/
 // @version      1.0
