@@ -12,11 +12,6 @@
 
 function addReadAloudButtons() {
   hideMoreActionsMenu();
-
-  const gptMessages = document.querySelectorAll('[data-turn="assistant"]');
-  if (!gptMessages.length) return;
-  createButtons(gptMessages);
-
   createNewMessagesObserver();
 }
 
@@ -41,6 +36,7 @@ function hideMoreActionsMenu() {
 }
 
 function createButtons(gptMessages) {
+  if (!gptMessages.length) return;
   gptMessages.forEach(msg => {
     createButton(msg);
   });
@@ -97,6 +93,9 @@ function createNewMessagesObserver() {
         if (node.nodeType === 1 && node.matches('[data-turn="assistant"]')) {
           const buttonsContainer = await waitForButtons(node);
           createButton(node);
+        } else if (node.nodeType === 1 && node.matches('[class="flex flex-col text-sm pb-25"]')) {
+          const gptMessages = document.querySelectorAll('[data-turn="assistant"]');
+          createButtons(gptMessages);
         }
       });
     });
