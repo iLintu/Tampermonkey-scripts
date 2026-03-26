@@ -6,6 +6,7 @@
 // @description  Restores the "Read aloud" button directly in ChatGPT UI
 // @match        https://chat.openai.com/*
 // @match        https://chatgpt.com/*
+// @run-at       document-idle
 // @grant        none
 // ==/UserScript==
 
