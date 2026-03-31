@@ -18,16 +18,11 @@ function addReadAloudButtons() {
 function hideMoreActionsMenu() {
   const style = document.createElement('style');
   style.innerHTML = `
-    /* hide "Try again" menu button */
-    button[aria-label="Switch model"] {
-      display: none !important;
+    [data-turn="assistant"] [aria-label="Response actions"] button[aria-label="More actions"] {
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
-    /* hide "More actions" menu button */
-    button[aria-label="More actions"] {
-      display: none !important;
-    }
-    /* hide "More actions" pop-up */
-    [role="menu"] {
+    [data-radix-popper-content-wrapper]:has([aria-label="Branch in new chat"]) {
       opacity: 0 !important;
       pointer-events: none !important;
     }
