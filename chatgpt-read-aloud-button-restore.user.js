@@ -82,15 +82,21 @@ async function waitForReadAloudButton(text, timeout = 2000) {
 }
 
 function createNewMessagesObserver() {
+  let target;
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       mutation.addedNodes.forEach(async node => {
         if (node.nodeType === 1 && node.matches('[data-turn="assistant"]')) {
           const buttonsContainer = await waitForButtons(node);
           createButton(node);
-        } else if (node.nodeType === 1 && node.matches('[class="flex flex-col text-sm pb-25"]')) {
-          const gptMessages = document.querySelectorAll('[data-turn="assistant"]');
-          createButtons(gptMessages);
+        } else if (node.nodeType === 1) {
+            const target = node.matches('[class="flex flex-col text-sm pb-25"]')
+                           ? node
+                           : node.querySelector('[class="flex flex-col text-sm pb-25"]');
+            if (target) {
+              const gptMessages = target.querySelectorAll('[data-turn="assistant"]');
+              createButtons(gptMessages);
+            }
         }
       });
     });
